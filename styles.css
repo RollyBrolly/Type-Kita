@@ -1,0 +1,116 @@
+:root{
+    --bg-color: #333;
+    --text-prim: #fff;
+    --text-sec: #aaa;
+    --primary-color: #fd4;
+
+}
+body{
+    font-family: poppins, sans-serif;
+    background-color:var(--bg-color);
+    color: var(--text-prim);
+    font-size: 1.4rem;
+}
+main{
+    width: 1700px;
+    margin-left: 80px;
+}
+h1{
+    color: var(--primary-color);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+h1 svg{
+    width: 60px;
+    height: 60px;
+    fill: var(--primary-color);
+    display: inline-block;
+    flex-shrink: 0;
+}
+#header{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 20px 6px 30px;
+}
+#buttons{
+    text-align: right;
+}
+#info{
+    color: var(--primary-color);
+}
+button{
+    background: rgba(255, 255, 255, 0.1);
+    border: 0;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 13px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor:pointer;
+    transition: 0.3s ease;
+}
+button:hover{
+    background: var(--primary-color);
+    color: var(--bg-color);
+    box-shadow: 4px 4px 10px 2px;
+    transform: translateY(-5px);
+}
+div#game{
+    line-height: 35px;
+    height: 105px;
+    overflow: hidden;
+    position: relative;
+}
+#words{
+    filter: blur(5px);
+    color: var(--text-sec);
+
+}
+#game:focus #words{
+    filter: blur(0);
+
+}
+#focus-error {
+    position: absolute;
+    inset: 0;
+    text-align: center;
+    padding-top: 35px;
+}
+#game:focus #focus-error{
+    display:none;
+}
+div .word{
+    display: inline-block;
+    margin: 0 5px;
+    font-family:  'Roboto Mono', monospace;
+}
+.letter.correct{
+    color: #fff;
+}
+.letter.incorrect{
+    color: #f55;
+}
+@keyframes blink{
+    0%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+#cursor{
+    display:none;
+    width: 2px;
+    height: 1.6rem;
+    background: var(--primary-color);
+    position: fixed;
+    top: 233px;
+    left: 90px;
+    animation: blink .5s infinite;
+}
+#game:focus #cursor{
+    display: block;
+}
