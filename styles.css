@@ -1,119 +1,281 @@
-:root{
-    --bg-color: #333;
-    --text-prim: #fff;
-    --text-sec: #aaa;
-    --primary-color: #fd4;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
+:root {
+  --bg: #0d0d0d;
+  --text: #e0e0e0;
+  --text-dim: #555;
+  --accent: #fbbf24;
+  --correct: #4ade80;
+  --incorrect: #ef4444;
+  --border: #222;
 }
-body{
-    font-family: poppins, sans-serif;
-    background-color:var(--bg-color);
-    color: var(--text-prim);
-    font-size: 1.4rem;
-}
-main{
-    width: 1700px;
-    margin-left: 80px;
-}
-h1{
-    color: var(--primary-color);
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-}
-h1 svg{
-    width: 60px;
-    height: 60px;
-    fill: var(--primary-color);
-    display: inline-block;
-    flex-shrink: 0;
-}
-#header{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: 20px 6px 30px;
-}
-#buttons{
-    text-align: right;
-}
-#info{
-    color: var(--primary-color);
-}
-button{
-    background: rgba(255, 255, 255, 0.1);
-    border: 0;
-    color: rgba(255, 255, 255, 0.5);
-    padding: 13px;
-    border-radius: 8px;
-    font-size: 1.2rem;
-    cursor:pointer;
-    transition: 0.3s ease;
-}
-button:hover{
-    background: var(--primary-color);
-    color: var(--bg-color);
-    box-shadow: 4px 4px 10px 2px;
-    transform: translateY(-5px);
-}
-div#game{
-    line-height: 35px;
-    height: 105px;
-    overflow: hidden;
-    position: relative;
-}
-div#game:focus{
-    outline: 0;
-}
-#words{
-    filter: blur(5px);
-    color: var(--text-sec);
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-#game:focus #words{
-    filter: blur(0);
 
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+main {
+  width: 920px;
+  max-width: 94vw;
+  padding: 2.5rem 1.5rem;
+}
+
+/* ── Title ── */
+
+h1 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 2.25rem;
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+
+h1 svg {
+  width: 30px;
+  fill: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ── Header / Stats ── */
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+#stats {
+  display: flex;
+  gap: 1.5rem;
+  align-items: baseline;
+}
+
+/* ── Time options ── */
+
+#time-options {
+  display: flex;
+  gap: 0.2rem;
+  padding-right: 1.25rem;
+  border-right: 1px solid var(--border);
+  margin-right: 0.25rem;
+}
+
+.time-opt {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 0 0.4rem;
+  transition: color 0.15s;
+  user-select: none;
+}
+
+.time-opt:hover {
+  color: var(--text);
+}
+
+.time-opt.active {
+  color: var(--accent);
+}
+
+/* ── Language options ── */
+
+#lang-options {
+  display: flex;
+  gap: 0.2rem;
+  padding-right: 1.25rem;
+  border-right: 1px solid var(--border);
+  margin-right: 0.25rem;
+}
+
+.lang-opt {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 0 0.35rem;
+  transition: color 0.15s;
+  user-select: none;
+}
+
+.lang-opt:hover {
+  color: var(--text);
+}
+
+.lang-opt.active {
+  color: var(--accent);
+}#timer {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  min-width: 2ch;
+}
+
+.stat {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.stat-value {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ── Button ── */
+
+#buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+button {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 0.5rem 1.25rem;
+  border-radius: 7px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+button:hover {
+  color: var(--text);
+  border-color: var(--accent);
+  background: rgba(251, 191, 36, 0.06);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* ── Progress bar ── */
+
+#progress-bar {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  margin-bottom: 1.75rem;
+  overflow: hidden;
+}
+
+#progress-fill {
+  height: 100%;
+  width: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 1s linear;
+}
+
+/* ── Game area ── */
+
+#game {
+  position: relative;
+  line-height: 2.5rem;
+  height: 7.5rem;
+  overflow: hidden;
+  outline: none;
+  cursor: text;
+  border-radius: 4px;
+}
+
+#words {
+  filter: blur(3px);
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', 'Fira Code', 'Roboto Mono', monospace;
+  font-size: 1.35rem;
+  transition: filter 0.2s ease, transform 0.1s ease;
+  will-change: transform;
+}
+
+#game:focus #words {
+  filter: blur(0);
+}
+
 #focus-error {
-    position: absolute;
-    inset: 0;
-    text-align: center;
-    padding-top: 35px;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: 1rem;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
 }
-#game:focus #focus-error{
-    display:none;
+
+#game:focus #focus-error {
+  opacity: 0;
 }
-div .word{
-    display: inline-block;
-    margin: 0 5px;
-    font-family:  'Roboto Mono', monospace;
+
+#game.over #focus-error {
+  display: none;
 }
-.letter.correct{
-    color: #fff;
+
+/* ── Words ── */
+
+.word {
+  display: inline-block;
+  margin: 0 6px;
 }
-.letter.incorrect{
-    color: #f55;
+
+.letter.correct {
+  color: var(--text);
 }
-@keyframes blink{
-    0%{
-        opacity: 1;
-    }
-    50%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 1;
-    }
+
+.letter.incorrect {
+  color: var(--incorrect);
 }
-#cursor{
-    display:none;
-    width: 2px;
-    height: 1.6rem;
-    background: var(--primary-color);
-    position: fixed;
-    top: 233px;
-    left: 90px;
-    animation: blink .5s infinite;
+
+
+/* ── Cursor ── */
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
-#game:focus #cursor{
-    display: block;
+
+#cursor {
+  display: none;
+  width: 2.5px;
+  height: 1.7rem;
+  background: var(--accent);
+  position: fixed;
+  animation: blink 0.8s infinite;
+  pointer-events: none;
+  border-radius: 1px;
+}
+
+#game:focus #cursor {
+  display: block;
+}
+
+#game.over #cursor {
+  display: none;
+}
+
+#game.over #words {
+  opacity: 0.35;
+  filter: blur(0);
 }
